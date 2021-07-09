@@ -14,8 +14,9 @@ class MembresiaController extends Controller
      */
     public function index()
     {
-        $datos['membresias'] = Membresia::paginate(10);
-        return view('membresia.index',$datos);
+        //$datos['membresias'] = Membresia::paginate(10);
+        $membresias = Membresia::get();
+        return view('membresia.index',compact('membresias'));
     }
 
     /**
@@ -38,6 +39,15 @@ class MembresiaController extends Controller
     public function store(Request $request)
     {
         //
+        $campos=[
+            'NombreMembresia'=>'required|string|max:100',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
         $datosMembresia = request()->except('_token'); 
         Membresia::insert($datosMembresia);
         return redirect('membresia')->with('mensaje','Membresia agregado');

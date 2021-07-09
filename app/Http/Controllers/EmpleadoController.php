@@ -55,7 +55,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        /*$campos=[
+        $campos=[
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -63,14 +63,14 @@ class EmpleadoController extends Controller
             'Telefono'=>'required|string|max:9',
             'Correo'=>'required|email',
             'Domicilio'=>'required|string|max:100',
-            'Area'=>'required|string|max:100',
-            'Foto'=>'required|max:10000|mines:jpeg,png,jpg',
+            'Area'=>'required|',
+            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
         ];
         $mensaje=[
             'required'=>'El :attribute es requerido',
             'Foto.required'=>'La foto requerida'
         ];
-        $this->validate($request, $campos, $mensaje);*/
+        $this->validate($request, $campos, $mensaje);
         
 
 
@@ -124,6 +124,23 @@ class EmpleadoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'ApellidoPaterno'=>'required|string|max:100',
+            'ApellidoMaterno'=>'required|string|max:100',
+            'dni'=>'required|string|max:8',
+            'Telefono'=>'required|string|max:9',
+            'Correo'=>'required|email',
+            'Domicilio'=>'required|string|max:100',
+            'Area'=>'required|',
+            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'Foto.required'=>'La foto requerida'
+        ];
+        $this->validate($request, $campos, $mensaje);
+        
         $datosEmpleado = request()->except(['_token','_method']);
 
        if($request->hasFile('Foto')){

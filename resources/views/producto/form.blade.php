@@ -1,3 +1,12 @@
+@if(count($errors)>0)
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li> {{ $error }} </li>
+                    @endforeach
+                </ul>                
+            </div>           
+@endif
 <div class="form-group">
     <label for="Nombre">Nombre del Producto</label>
     <input type="text" name="NombreProducto" id="NombreProducto" class="form-control" value="{{ isset($producto->NombreProducto)?$producto->NombreProducto:'' }}">

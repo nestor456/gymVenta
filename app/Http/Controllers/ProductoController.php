@@ -39,6 +39,20 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $campos=[
+            'NombreProducto'=>'required|string|max:100',
+            'Detalle'=>'required|text|max:100',
+            'Stock'=>'integer',
+            'Precio'=>'required|',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'integer'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+        
         $datosProducto = request()->except('_token'); 
         Producto::insert($datosProducto);
         return redirect('producto')->with('mensaje','Producto agregado');
@@ -78,6 +92,19 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $campos=[
+            'NombreProducto'=>'required|string|max:100',
+            'Detalle'=>'required|text|max:100',
+            'Stock'=>'integer',
+            'Precio'=>'required|',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'integer'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
         $datosProducto = request()->except(['_token','_method']);
         Producto::where('id','=',$id)->update($datosProducto);
         return redirect('producto');

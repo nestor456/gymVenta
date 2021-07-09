@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use Illuminate\Http\Request;
+use App\Http\Request\AreaStoreRequest;
 
 class AreaController extends Controller
 {
@@ -14,8 +15,10 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $datos['areas'] = Area::paginate(10);
-        return view('area.index', $datos);
+        /*$datos['areas'] = Area::paginate(10);
+        return view('area.index', $datos);*/
+        $areas = Area::get();
+        return view('area.index', compact('areas'));
     }
 
     /**
@@ -38,9 +41,21 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         //
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+
+
         $datosArea = request()->except('_token'); 
         Area::insert($datosArea);
         return redirect('area')->with('mensaje','Area agregado');
+        
 
     }
 
@@ -78,6 +93,16 @@ class AreaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+        ];
+
+        $this->validate($request, $campos, $mensaje);
+
         $datosArea = request()->except(['_token','_method']);
         Area::where('id','=',$id)->update($datosArea);
         return redirect('area');

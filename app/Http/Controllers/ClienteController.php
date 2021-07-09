@@ -43,6 +43,25 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         //
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'ApellidoPaterno'=>'required|string|max:100',
+            'ApellidoMaterno'=>'required|string|max:100',
+            'dni'=>'required|string|max:8',
+            'Telefono'=>'required|string|max:9',
+            'Correo'=>'required|email',
+            'Plan_contratado'=>'required|string|max:100',
+            'Promocion'=>'required|string|max:100',
+            'Entrenador'=>'required|string|max:100',
+            'Objetivo_fisico'=>'required|string|max:100',
+            'Fecha_Inicio'=>'required|string|',
+            'Fecha_Final'=>'required|string|',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'Foto.required'=>'La foto requerida'
+        ];
+        $this->validate($request, $campos, $mensaje);
         $datosCliente = request()->except('_token'); 
         Cliente::insert($datosCliente);
         return redirect('cliente')->with('mensaje','Cliente agregado');
