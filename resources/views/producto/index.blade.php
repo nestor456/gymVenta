@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid" >
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-12 table-responsive">
         <a href="{{ url('producto/create') }}" class="btn btn-success">Resgitrar nueva Producto</a>
         <br><br>
         <table class="table table-dark">
@@ -18,8 +18,8 @@
                 <tr>
                     <td class="text-center">{{ $producto->NombreProducto }}</td>
                     <td class="text-center">{{ $producto->Detalle }}</td>
-                    <td class="text-center">{{ $producto->Stock }}</td>
-                    <td class="text-center">{{ $producto->Precio }}</td>
+                    <td class="text-center">{{ $producto->stock }}</td>
+                    <td class="text-center">{{ $producto->precio }}</td>
 
                     <td><a href="{{ url('/producto/'.$producto->id.'/edit') }}" class="btn btn-warning">
                         Editar

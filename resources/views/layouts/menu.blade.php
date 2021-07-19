@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -25,7 +27,7 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Start Bootstrap</div>
+            <div class="sidebar-heading">TemploGym</div>
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('empleado') }}">Empleados</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('cliente') }}">Clientes</a>
@@ -33,12 +35,13 @@
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('area') }}">Area</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('membresia') }}">Membresia</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('producto') }}">Producto</a>
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('venta') }}">Venta</a>
             </div>
         </div>
         <!-- Page Content-->
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+                <button class="btn btn-primary" id="menu-toggle">Menu</button>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">

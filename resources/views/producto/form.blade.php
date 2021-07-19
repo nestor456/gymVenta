@@ -17,11 +17,11 @@
 </div>
 <div class="form-group">
     <label for="Nombre">Stock</label>
-    <input type="text" name="Stock" id="Stock" class="form-control" value="{{ isset($producto->Stock)?$producto->Stock:'' }}">
+    <input type="text" name="stock" id="stock" class="form-control" value="{{ isset($producto->stock)?$producto->stock:'' }}">
 </div>
 <div class="form-group">
     <label for="Nombre">Precio</label>
-    <input type="text" name="Precio" id="Precio" class="form-control" value="{{ isset($producto->Precio)?$producto->Precio:'' }}">
+    <input type="text" name="precio" id="precio" class="form-control" value="{{ isset($producto->precio)?$producto->precio:'' }}">
 </div>
 
 <input type="submit" value="{{ $modo }} Datos" class="btn btn-success">

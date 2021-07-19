@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid" >
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-12 table-responsive">
         <a href="{{ url('membresia/create') }}" class="btn btn-success">Resgitrar nueva Membresia</a>
         <br><br>
         <table class="table table-dark">

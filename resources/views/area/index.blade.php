@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid" >
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-12 table-responsive">
         <a href="{{ url('area/create') }}" class="btn btn-success">Resgitrar nueva Area</a>
         <br><br>
         <table class="table table-dark">

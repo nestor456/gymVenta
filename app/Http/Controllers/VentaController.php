@@ -3,82 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\Venta;
+use App\Models\Cliente;
+use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Auth;
 
 class VentaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $ventas = Venta::get();
+        return view('venta.index', compact('ventas'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+        $clientes = Cliente::get();
+        $productos = Producto::get();
+        return view('venta.create',compact('clientes','productos'));
+    }    
     public function store(Request $request)
-    {
-        //
-    }
+    { 
+        $venta = Venta::create($request->all()+[
+            'user_id' => auth()->id(),
+            'sale_date'=>Carbon::now('America/lima'),
+        ]); 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
+        $id_producto = $request->producto_id;
+        $quantity = $request->quantity;
+
+        $stock = Producto::select('stock')->where('id',$id_producto)->first();      
+        
+        foreach($request->producto_id as $key => $producto){
+
+            $results[] = array("producto_id"=>$request->producto_id[$key],
+            "quantity"=>$request->quantity[$key], "precio"=>$request->precio[$key]);
+
+            $nuevostock = $stock->stock - $request->quantity[$key];
+            
+            $producto = Producto::find($producto);
+            $producto->fill(['stock' => $nuevostock])->save();
+            
+        }             
+        $venta->DetalleVenta()->createMany($results);
+        return redirect('venta');
+    }
     public function show(Venta $venta)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Venta $venta)
     {
-        //
+        $clientes = Cliente::get();
+        return view('venta.edite',compact('clientes'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Venta $venta)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Venta  $venta
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Venta $venta)
+     function destroy(Venta $venta)
     {
         //
     }

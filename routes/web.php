@@ -6,6 +6,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\VentaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,7 @@ Route::get('/empleado', function () {
 
 Auth::routes(['register'=>true, 'reset'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => 'auth'], function() {
@@ -40,6 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('membresia',MembresiaController::class);
     Route::resource('producto',ProductoController::class);
     Route::resource('cliente',ClienteController::class);
+    Route::resource('venta',VentaController::class);
 });
 
 

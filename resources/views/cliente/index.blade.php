@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid" >
 <div class="row">
-    <div class="col-xl-12">
+    <div class="col-xl-12 table-responsive">
         <a href="{{ url('cliente/create') }}" class="btn btn-success">Resgitrar nueva Cliente</a>
         <br><br>
         <table class="table table-striped table-hover">
@@ -15,12 +15,12 @@
                 <th>dni</th>
                 <th>Telefono</th>
                 <th>Correo</th>
-                <th>Plan contratado</th>
-                <th>Promocion</th>
+                <th>Membresía</th>
                 <th>Entrenador</th>
                 <th>Objetivo fisico</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Final</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 @foreach($clientes as $cliente)
@@ -33,8 +33,7 @@
                     <td>{{ $cliente->dni }}</td>
                     <td>{{ $cliente->Telefono }}</td>
                     <td>{{ $cliente->Correo }}</td>
-                    <td>{{ $cliente->Plan_contratado }}</td>
-                    <td>{{ $cliente->Promocion }}</td>
+                    <td>{{ $cliente->Membresia }}</td>
                     <td>{{ $cliente->Entrenador }}</td>
                     <td>{{ $cliente->Objetivo_fisico }}</td>
                     <td>{{ $cliente->Fecha_Inicio }}</td>

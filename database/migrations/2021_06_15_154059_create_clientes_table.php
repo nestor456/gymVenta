@@ -21,8 +21,8 @@ class CreateClientesTable extends Migration
             $table->string('dni');
             $table->string('Telefono');
             $table->string('Correo');
-            $table->string('Plan_contratado');
-            $table->string('Promocion');
+            $table->string('Membresia');
+            //$table->string('Promocion');
             $table->string('Entrenador');
             $table->text('Objetivo_fisico');
             $table->string('Fecha_Inicio');

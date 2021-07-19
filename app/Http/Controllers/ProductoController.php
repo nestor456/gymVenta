@@ -39,7 +39,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
-        $campos=[
+        /*$campos=[
             'NombreProducto'=>'required|string|max:100',
             'Detalle'=>'required|text|max:100',
             'Stock'=>'integer',
@@ -51,9 +51,9 @@ class ProductoController extends Controller
             'integer'=>'El :attribute es requerido'
         ];
 
-        $this->validate($request, $campos, $mensaje);
-        
+        $this->validate($request, $campos, $mensaje);*/
         $datosProducto = request()->except('_token'); 
+
         Producto::insert($datosProducto);
         return redirect('producto')->with('mensaje','Producto agregado');
     }
