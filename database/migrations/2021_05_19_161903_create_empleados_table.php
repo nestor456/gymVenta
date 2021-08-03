@@ -23,7 +23,6 @@ class CreateEmpleadosTable extends Migration
             $table->string('Correo');
             $table->string('Domicilio');
             $table->string('Area');
-            $table->string('Foto');
             $table->timestamps();
         });
     }

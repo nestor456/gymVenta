@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asistencia_cliente extends Model
 {
-    use HasFactory;
+    protected $fillable = ['cliente_id', 'fecha', 'status'];
+
 
     public function cliente()
     {

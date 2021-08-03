@@ -55,13 +55,7 @@
                 </select>
         </div>
 
-        <div class="form-group">
-            <label for="Foto">Foto</label>
-        @if(isset($empleado->Foto))
-            <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$empleado->Foto }}" width="100" alt="">
-        @endif        
-        <input type="file" class="form-control-file" name="Foto" id="Foto" value="">
-        </div>
+        
 
         <input type="submit" value="{{ $modo }} Datos" class="btn btn-success">
 

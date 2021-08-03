@@ -53,6 +53,15 @@
         <textarea class="form-control" name="Objetivo_fisico" id="Objetivo_fisico" class="form-control">{{ isset($cliente->Objetivo_fisico)?$cliente->Objetivo_fisico:'' }}</textarea>
 
 </div>
+
+<div class="form-group">
+    <label for="Foto">Foto</label>
+        @if(isset($empleado->Foto))
+    <img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente->Foto }}" width="100" alt="">
+        @endif        
+    <input type="file" class="form-control-file" name="Foto" id="Foto" value="">
+</div>
+
 <div class="form-group">
     <label for="Fecha_Inicio">Fecha_Inicio</label>
     <input type="date" name="Fecha_Inicio" id="Fecha_Inicio" class="form-control" value="{{ isset($cliente->Fecha_Inicio)?$cliente->Fecha_Inicio:'' }}">

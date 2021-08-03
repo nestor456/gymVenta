@@ -53,15 +53,25 @@ class ClienteController extends Controller
             //'Membresia'=>'required|string|max:100',
             'Entrenador'=>'required|string|max:100',
             'Objetivo_fisico'=>'required|string|max:100',
+            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
             'Fecha_Inicio'=>'required|string|',
             'Fecha_Final'=>'required|string|',
         ];
+
         $mensaje=[
             'required'=>'El :attribute es requerido',
             'Foto.required'=>'La foto requerida'
         ];
+        
         $this->validate($request, $campos, $mensaje);
+
         $datosCliente = request()->except('_token'); 
+
+        if($request->hasFile('Foto')){
+
+            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public');
+
+        }
         Cliente::insert($datosCliente);
         return redirect('cliente')->with('mensaje','Cliente agregado');
     }

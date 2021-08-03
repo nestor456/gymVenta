@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asistencia_cliente;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class AsistenciaClienteController extends Controller
@@ -14,7 +15,8 @@ class AsistenciaClienteController extends Controller
      */
     public function index()
     {
-        //
+        $asistencias = Asistencia_cliente::all();
+        return view('asistencia_cliente.index', compact('asistencias'));
     }
 
     /**

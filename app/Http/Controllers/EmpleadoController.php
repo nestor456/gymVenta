@@ -21,7 +21,7 @@ class EmpleadoController extends Controller
         $texto = trim($request->get('texto'));
 
        $empleados = DB::table('empleados')
-                    ->select('id','Nombre','ApellidoPaterno','ApellidoMaterno','dni','Telefono','Correo','Domicilio','Area','Foto')
+                    ->select('id','Nombre','ApellidoPaterno','ApellidoMaterno','dni','Telefono','Correo','Domicilio','Area')
                     ->where('ApellidoPaterno','LIKE','%'.$texto.'%')
                     ->orwhere('dni','LIKE','%'.$texto.'%')
                     ->orderBy('ApellidoPaterno','asc')
@@ -64,25 +64,16 @@ class EmpleadoController extends Controller
             'Correo'=>'required|email',
             'Domicilio'=>'required|string|max:100',
             'Area'=>'required|',
-            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
+            
         ];
         $mensaje=[
             'required'=>'El :attribute es requerido',
             'Foto.required'=>'La foto requerida'
         ];
-        $this->validate($request, $campos, $mensaje);
-        
-
-
+        $this->validate($request, $campos, $mensaje);     
 
         //$datosEmpleado = request()->all(); 
         $datosEmpleado = request()->except('_token'); 
-
-        if($request->hasFile('Foto')){
-
-            $datosEmpleado['Foto']=$request->file('Foto')->store('uploads','public');
-
-        }
 
         Empleado::insert($datosEmpleado);  
 
@@ -165,12 +156,7 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         //
-        $empleado = Empleado::findOrFail($id);
-
-        if(Storage::delete('public/'.$empleado->Foto)){
-
-            Empleado::destroy($id);
-        }    
+        Empleado::destroy($id);
         
         return redirect('empleado')->with('mensaje','Empleado Borrado');
     }

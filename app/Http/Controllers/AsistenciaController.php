@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Asistencia;
 use Illuminate\Http\Request;
+use App\Models\Empleado;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AsistenciaController extends Controller
 {
@@ -15,6 +18,12 @@ class AsistenciaController extends Controller
     public function index()
     {
         //
+
+        $asistencias = Asistencia::all();
+        return view('asistencia.index', compact('asistencias'));
+        
+        
+        
     }
 
     /**
@@ -25,6 +34,7 @@ class AsistenciaController extends Controller
     public function create()
     {
         //
+        return view('asistencia.create');
     }
 
     /**
@@ -36,6 +46,23 @@ class AsistenciaController extends Controller
     public function store(Request $request)
     {
         //
+        $dni = $request->dni;
+        $id_empleado = Empleado::select('id')->where('dni',$dni)->first();  
+
+        if($id_empleado){
+
+             $asistencia = Asistencia::create($request->all()+[
+            'empleado_id' => $id_empleado->id,
+            'fecha'=>Carbon::now('America/lima'),
+        ]);   
+
+        return redirect('asistencia/create')->with('mensaje','Asistencia Registrada');
+
+        }else{
+            return redirect('asistencia/create')->with('mensaje','DNI no registrado');
+        }
+
+       
     }
 
     /**

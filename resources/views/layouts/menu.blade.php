@@ -36,6 +36,8 @@
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('membresia') }}">Membresia</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('producto') }}">Producto</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('venta') }}">Venta</a>
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia') }}">lista Asistencia Empleados</a>
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia_cliente') }}">lista Asistencia cliente</a>
             </div>
         </div>
         <!-- Page Content-->

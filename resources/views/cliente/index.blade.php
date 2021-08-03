@@ -9,6 +9,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <th>#</th>
+                <th>Foto</th>
                 <th>Nombre</th>
                 <th>A.Paterno</th>
                 <th>A.Materno</th>
@@ -27,6 +28,7 @@
                     
                     <tr>
                     <td>{{ $cliente->id }}</td>
+                    <td><img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$cliente->Foto }}" width="100" alt=""> </td>
                     <td>{{ $cliente->Nombre }}</td>
                     <td>{{ $cliente->ApellidoPaterno }}</td>
                     <td>{{ $cliente->ApellidoMaterno }}</td>
