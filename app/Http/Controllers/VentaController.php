@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Auth;
 
+use Barryvdh\DomPDF\Facade as PDF;
+
 class VentaController extends Controller
 {
 
@@ -50,21 +52,39 @@ class VentaController extends Controller
         $venta->DetalleVenta()->createMany($results);
         return redirect('venta');
     }
+
     public function show(Venta $venta)
     {
         //
     }
+
     public function edit(Venta $venta)
     {
         $clientes = Cliente::get();
         return view('venta.edite',compact('clientes'));
     }
+
     public function update(Request $request, Venta $venta)
     {
         //
     }
+
      function destroy(Venta $venta)
     {
         //
+    }
+
+    public function pdf(Venta $venta)
+    {
+        $subtotal = 0;
+        $detalleVentas = $venta->detalleVenta;
+        foreach($detalleVentas as $detalleVenta){
+            $subtotal += $detalleVenta->quantity*$detalleVenta->precio;
+            
+        }
+
+        $pdf = PDF::loadView('venta.pdf', compact('venta','subtotal','detalleVentas'));
+
+        return $pdf->download('Reporte_de_venta'.$venta->id.'.pdf');
     }
 }
