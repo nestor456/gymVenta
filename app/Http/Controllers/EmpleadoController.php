@@ -123,12 +123,10 @@ class EmpleadoController extends Controller
             'Telefono'=>'required|string|max:9',
             'Correo'=>'required|email',
             'Domicilio'=>'required|string|max:100',
-            'Area'=>'required|',
-            'Foto'=>'required|max:10000|dimensions:min_width=100,min_height=200',
+            'Area'=>'required|'
         ];
         $mensaje=[
-            'required'=>'El :attribute es requerido',
-            'Foto.required'=>'La foto requerida'
+            'required'=>'El :attribute es requerido'
         ];
         $this->validate($request, $campos, $mensaje);
         

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MembresiaController;
@@ -49,6 +50,10 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('asistencia_cliente',AsistenciaClienteController::class);
 
     Route::get('venta/pdf/{venta}', [VentaController::class, 'pdf'])->name('venta.pdf');
+    
+    Route::get('reporte/reports_day',[ReporteController::class, 'reports_day'])->name('reports.day');
+    Route::get('reporte/reports_date',[ReporteController::class, 'reports_date'])->name('reports.date');
+    Route::post('reporte/report_results',[ReporteController::class, 'report_results'])->name('report.results');
 
     
 });

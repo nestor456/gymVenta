@@ -92,7 +92,7 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $campos=[
+        /*$campos=[
             'NombreProducto'=>'required|string|max:100',
             'Detalle'=>'required|text|max:100',
             'Stock'=>'integer',
@@ -104,7 +104,8 @@ class ProductoController extends Controller
             'integer'=>'El :attribute es requerido'
         ];
 
-        $this->validate($request, $campos, $mensaje);
+        $this->validate($request, $campos, $mensaje);*/
+
         $datosProducto = request()->except(['_token','_method']);
         Producto::where('id','=',$id)->update($datosProducto);
         return redirect('producto');

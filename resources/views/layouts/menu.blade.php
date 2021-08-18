@@ -38,6 +38,8 @@
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('venta') }}">Venta</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia') }}">lista Asistencia Empleados</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia_cliente') }}">lista Asistencia cliente</a>
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('reporte/reports_day') }}">Reporte por dia</a>
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('reporte/reports_date') }}">Reporte por mes</a>
             </div>
         </div>
         <!-- Page Content-->
