@@ -25,7 +25,7 @@ class EmpleadoController extends Controller
                     ->where('ApellidoPaterno','LIKE','%'.$texto.'%')
                     ->orwhere('dni','LIKE','%'.$texto.'%')
                     ->orderBy('ApellidoPaterno','asc')
-                    ->paginate(5);
+                    ->paginate(10);
 
        //echo $empleado;
 
@@ -55,7 +55,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        $campos=[
+        /*$campos=[
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -70,14 +70,25 @@ class EmpleadoController extends Controller
             'required'=>'El :attribute es requerido',
             'Foto.required'=>'La foto requerida'
         ];
-        $this->validate($request, $campos, $mensaje);     
+        $this->validate($request, $campos, $mensaje);*/  
+        
+        $request->validate([
+            'Nombre'=>'required|string|max:100',
+            'ApellidoPaterno'=>'required|string|max:100',
+            'ApellidoMaterno'=>'required|string|max:100',
+            'dni'=>'required|string|max:8',
+            'Telefono'=>'required|string|max:9',
+            'Correo'=>'required|email',
+            'Domicilio'=>'required|string|max:100',
+            'Area'=>'required|',
+        ]);
 
         //$datosEmpleado = request()->all(); 
         $datosEmpleado = request()->except('_token'); 
 
         Empleado::insert($datosEmpleado);  
 
-        return redirect('empleado')->with('mensaje','Empleado agregado'); 
+        return redirect('empleado')->with('info','El empleado se creó con éxito'); 
         
     }
 
@@ -115,7 +126,7 @@ class EmpleadoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $campos=[
+        $request->validate([
             'Nombre'=>'required|string|max:100',
             'ApellidoPaterno'=>'required|string|max:100',
             'ApellidoMaterno'=>'required|string|max:100',
@@ -123,26 +134,13 @@ class EmpleadoController extends Controller
             'Telefono'=>'required|string|max:9',
             'Correo'=>'required|email',
             'Domicilio'=>'required|string|max:100',
-            'Area'=>'required|'
-        ];
-        $mensaje=[
-            'required'=>'El :attribute es requerido'
-        ];
-        $this->validate($request, $campos, $mensaje);
+            'Area'=>'required|',
+        ]);        
         
         $datosEmpleado = request()->except(['_token','_method']);
 
-       if($request->hasFile('Foto')){
-
-            $empleado = Empleado::findOrFail($id);
-
-            Storage::delete('public/'.$empleado->Foto);
-
-            $datosEmpleado['Foto']=$request->file('Foto')->store('uploads','public');
-        }
-
         Empleado::where('id','=',$id)->update($datosEmpleado);
-        return redirect('empleado');
+        return redirect('empleado')->with('info','El empleado se edito con éxito');
     }
 
     /**
@@ -156,6 +154,6 @@ class EmpleadoController extends Controller
         //
         Empleado::destroy($id);
         
-        return redirect('empleado')->with('mensaje','Empleado Borrado');
+        return redirect('empleado')->with('info','El empleado se borro con éxito');
     }
 }

@@ -19,7 +19,7 @@ class AsistenciaController extends Controller
     {
         //
 
-        $asistencias = Asistencia::all();
+        $asistencias = Asistencia::paginate(10);
         return view('asistencia.index', compact('asistencias'));
         
         

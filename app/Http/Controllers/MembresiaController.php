@@ -15,7 +15,7 @@ class MembresiaController extends Controller
     public function index()
     {
         //$datos['membresias'] = Membresia::paginate(10);
-        $membresias = Membresia::get();
+        $membresias = Membresia::paginate(10);
         return view('membresia.index',compact('membresias'));
     }
 
@@ -39,7 +39,7 @@ class MembresiaController extends Controller
     public function store(Request $request)
     {
         //
-        $campos=[
+        /*$campos=[
             'NombreMembresia'=>'required|string|max:100',
         ];
 
@@ -47,10 +47,14 @@ class MembresiaController extends Controller
             'required'=>'El :attribute es requerido'
         ];
 
-        $this->validate($request, $campos, $mensaje);
+        $this->validate($request, $campos, $mensaje);*/
+        $request->validate([
+            'NombreMembresia'=>'required|string|max:100',
+        ]); 
+
         $datosMembresia = request()->except('_token'); 
         Membresia::insert($datosMembresia);
-        return redirect('membresia')->with('mensaje','Membresia agregado');
+        return redirect('membresia')->with('info','La membresia se creó con éxito');
     }
 
     /**
@@ -89,7 +93,7 @@ class MembresiaController extends Controller
         //
         $datosMembresia = request()->except(['_token','_method']);
         Membresia::where('id','=',$id)->update($datosMembresia);
-        return redirect('membresia');
+        return redirect('membresia')->with('info','La membresia se edito con éxito');
     }
 
     /**
@@ -102,6 +106,6 @@ class MembresiaController extends Controller
     {
         //
         Membresia::destroy($id);
-        return redirect('membresia')->with('mensaje','membresia Borrado');
+        return redirect('membresia')->with('info','La membresia se elimino con éxito');
     }
 }

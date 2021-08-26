@@ -17,7 +17,7 @@ class VentaController extends Controller
 
     public function index()
     {
-        $ventas = Venta::get();
+        $ventas = Venta::paginate(10);
         return view('venta.index', compact('ventas'));
     }
     public function create()
@@ -69,9 +69,10 @@ class VentaController extends Controller
         //
     }
 
-     function destroy(Venta $venta)
+     function destroy($id)
     {
-        //
+        Venta::destroy($id);
+        return redirect()->route('admin.venta.index')->with('info','La venta se eliminado con éxito');
     }
 
     public function pdf(Venta $venta)

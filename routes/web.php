@@ -8,6 +8,9 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MembresiaController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
+
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\AsistenciaClienteController;
 /*
@@ -31,7 +34,7 @@ Route::get('/', function () {
 //Route::get('/empleado/create',[EmpleadoController::class,'create']);
 
 
-Auth::routes(['register'=>true, 'reset'=>false]);
+Auth::routes(['register'=>false, 'reset'=>false]);
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -40,15 +43,18 @@ Route::group(['middleware' => 'auth'], function() {
     //
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::resource('empleado',EmpleadoController::class);
-    Route::resource('area',AreaController::class);
-    Route::resource('membresia',MembresiaController::class);
-    Route::resource('producto',ProductoController::class);
-    Route::resource('cliente',ClienteController::class);
-    Route::resource('venta',VentaController::class);
-    Route::resource('asistencia',AsistenciaController::class);
-    Route::resource('asistencia_cliente',AsistenciaClienteController::class);
-
+    Route::resource('empleado',EmpleadoController::class)->names('admin.empleado');
+    Route::resource('area',AreaController::class)->names('admin.area');
+    Route::resource('membresia',MembresiaController::class)->names('admin.membresia');
+    Route::resource('producto',ProductoController::class)->names('admin.producto');
+    Route::resource('cliente',ClienteController::class)->names('admin.cliente');
+    Route::resource('venta',VentaController::class)->names('admin.venta');
+    Route::resource('asistencia',AsistenciaController::class)->names('admin.asistencia');
+    Route::resource('asistencia_cliente',AsistenciaClienteController::class)->names('admin.asistencia_cliente');
+    
+    Route::resource('users', UserController::class)->names('admin.users');
+    Route::resource('roles', RoleController::class)->names('admin.roles');
+    
     Route::get('venta/pdf/{venta}', [VentaController::class, 'pdf'])->name('venta.pdf');
     
     Route::get('reporte/reports_day',[ReporteController::class, 'reports_day'])->name('reports.day');

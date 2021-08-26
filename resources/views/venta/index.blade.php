@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container-fluid" >
-<div class="row">
-    <div class="table-responsive col-xl-12">
+<div class="card">
+    <div class="table-responsive card-body">
         <a href="{{ url('venta/create') }}" class="btn btn-success">Resgitrar nueva Venta</a>
         <br><br>
         
@@ -13,39 +13,42 @@
         </form>
 
         <br><br>
-        <table class="table table-striped table-hover">
-            <thead>
-                <th>Id</th>
-                <th>Nombre y Apellidos</th>
-                <th>DNI</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+        <table class="table table-striped table-dark">
+            <thead class="thead-light">
+                <th class="text-center">Id</th>
+                <th class="text-center">Nombre y Apellidos</th>
+                <th class="text-center">DNI</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center" colspan="2">Acciones</th>
             </thead>
             <tbody>
                 @foreach($ventas as $venta)
                     
                     <tr>
-                    <td>{{ $venta->id }}</td>
-                    <td>{{ $venta->cliente->Nombre }} {{ $venta->cliente->ApellidoPaterno }} {{ $venta->cliente->ApellidoMaterno }}</td>
-                    <td>{{ $venta->cliente->dni }}</td>
-                    <td>{{ $venta->sale_date }}</td>
-                    <td>{{ $venta->total }}</td>
-                    <td>{{ $venta->status }}</td>                  
-                    <td>
-                         <form action="{{ url('/venta/'.$venta->id ) }}" class="d-inline" method="post">
+                    <td class="text-center">{{ $venta->id }}</td>
+                    <td class="text-center">{{ $venta->cliente->Nombre }} {{ $venta->cliente->ApellidoPaterno }} {{ $venta->cliente->ApellidoMaterno }}</td>
+                    <td class="text-center">{{ $venta->cliente->dni }}</td>
+                    <td class="text-center">{{ $venta->sale_date }}</td>
+                    <td class="text-center">{{ $venta->total }}</td>
+                    <td class="text-center">{{ $venta->status }}</td>                  
+                    <td width="50px">
+                        <form action="{{ url('/venta/'.$venta->id ) }}" class="d-inline" method="post">
                             @csrf
                             {{ method_field('DELETE') }}
                             <input type="submit" onclick="return confirm('¿Quieres borrar?')" class="btn btn-danger" value="Borrar"> 
                         </form>
-                    |
-                    <a href="{{route('venta.pdf', $venta) }}" type="button" class="btn btn-primary boton" >Imprimir</a></td>
+                    </td>
+                    <td width="50px">
+                        <a href="{{route('venta.pdf', $venta) }}" type="button" class="btn btn-primary boton" >Imprimir</a>
+                    </td>
+                
                     </tr>
                 @endforeach                
             </tbody>
         </table>
-        
+        {!! $ventas->links() !!}
     </div>
 </div>
 </div>

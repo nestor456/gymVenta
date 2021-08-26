@@ -2,15 +2,19 @@
 
 @section('content')
 
-<div class="container">
-    <form action="{{ url('/venta')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        @include('venta.form',['modo'=>'Create'])
-        <div class="card-footer text-muted">
-            <button type="submit" id="guardar" class="btn btn-primary float-right">Registrar</button>
-            <a href="{{ url('venta') }}" class="btn btn-light">cancelar</a>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ url('/venta')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                @include('venta.form',['modo'=>'Create'])
+                <div class="card-footer text-muted">
+                    <button type="submit" id="guardar" class="btn btn-primary float-right">Registrar</button>
+                    <a href="{{ url('venta') }}" class="btn btn-light">cancelar</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>    
 </div>
 
 

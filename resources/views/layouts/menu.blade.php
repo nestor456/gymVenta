@@ -29,17 +29,50 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">TemploGym</div>
             <div class="list-group list-group-flush">
+            @can('admin.empleado.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('empleado') }}">Empleados</a>
+            @endcan
+
+            @can('admin.cliente.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('cliente') }}">Clientes</a>
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Usuario</a>
+            @endcan 
+
+            @can('admin.users.index')
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('users') }}">Usuario</a>
+            @endcan  
+
+            @can('admin.roles.index')
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('roles') }}">Lista de Roles</a>
+            @endcan                 
+                
+            @can('admin.area.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('area') }}">Area</a>
+            @endcan 
+               
+            @can('admin.membresia.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('membresia') }}">Membresia</a>
+            @endcan 
+                
+            @can('admin.producto.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('producto') }}">Producto</a>
+            @endcan 
+                
+            @can('admin.venta.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('venta') }}">Venta</a>
+            @endcan 
+
+            @can('admin.asistencia.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia') }}">lista Asistencia Empleados</a>
+            @endcan  
+
+            @can('admin.asistencia_cliente.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('asistencia_cliente') }}">lista Asistencia cliente</a>
+            @endcan
+
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('reporte/reports_day') }}">Reporte por dia</a>
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('reporte/reports_date') }}">Reporte por mes</a>
+             
+   
             </div>
         </div>
         <!-- Page Content-->

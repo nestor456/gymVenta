@@ -15,7 +15,7 @@ class AsistenciaClienteController extends Controller
      */
     public function index()
     {
-        $asistencias = Asistencia_cliente::all();
+        $asistencias = Asistencia_cliente::paginate(10);
         return view('asistencia_cliente.index', compact('asistencias'));
     }
 

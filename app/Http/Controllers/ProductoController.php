@@ -15,7 +15,7 @@ class ProductoController extends Controller
     public function index()
     {
         //
-        $productos = Producto::get();
+        $productos = Producto::paginate(10);
         return view('producto.index', compact('productos'));
     }
 
@@ -52,10 +52,17 @@ class ProductoController extends Controller
         ];
 
         $this->validate($request, $campos, $mensaje);*/
+        $request->validate([
+            'NombreProducto'=>'required|string|max:100',
+            'Detalle'=>'required|text|max:100',
+            'Stock'=>'integer',
+            'Precio'=>'required|',
+        ]); 
+
         $datosProducto = request()->except('_token'); 
 
         Producto::insert($datosProducto);
-        return redirect('producto')->with('mensaje','Producto agregado');
+        return redirect('producto')->with('info','El producto se creó con éxito');
     }
 
     /**
@@ -92,23 +99,16 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        /*$campos=[
+        $request->validate([
             'NombreProducto'=>'required|string|max:100',
             'Detalle'=>'required|text|max:100',
             'Stock'=>'integer',
             'Precio'=>'required|',
-        ];
-
-        $mensaje=[
-            'required'=>'El :attribute es requerido',
-            'integer'=>'El :attribute es requerido'
-        ];
-
-        $this->validate($request, $campos, $mensaje);*/
+        ]); 
 
         $datosProducto = request()->except(['_token','_method']);
         Producto::where('id','=',$id)->update($datosProducto);
-        return redirect('producto');
+        return redirect('producto')->with('info','El producto se edito con éxito');
     }
 
     /**
@@ -121,6 +121,6 @@ class ProductoController extends Controller
     {
         //
         Producto::destroy($id);
-        return redirect('producto')->with('mensaje','producto Borrado');
+        return redirect('producto')->with('info','El producto se elimino con éxito');
     }
 }

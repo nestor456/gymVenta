@@ -17,7 +17,7 @@ class AreaController extends Controller
     {
         /*$datos['areas'] = Area::paginate(10);
         return view('area.index', $datos);*/
-        $areas = Area::get();
+        $areas = Area::paginate(10);
         return view('area.index', compact('areas'));
     }
 
@@ -54,7 +54,7 @@ class AreaController extends Controller
 
         $datosArea = request()->except('_token'); 
         Area::insert($datosArea);
-        return redirect('area')->with('mensaje','Area agregado');
+        return redirect('area')->with('info','El are se creó con éxito');
         
 
     }
@@ -105,7 +105,7 @@ class AreaController extends Controller
 
         $datosArea = request()->except(['_token','_method']);
         Area::where('id','=',$id)->update($datosArea);
-        return redirect('area');
+        return redirect('area')->with('info','El rol se edito con éxito');
     }
 
     /**
@@ -118,6 +118,6 @@ class AreaController extends Controller
     {
         //
         Area::destroy($id);
-        return redirect('area')->with('mensaje','area Borrado');
+        return redirect('area')->with('info','El rol se elimino con éxito');
     }
 }
