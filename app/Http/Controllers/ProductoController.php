@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
+
 class ProductoController extends Controller
 {
     /**
@@ -38,25 +39,11 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        /*$campos=[
-            'NombreProducto'=>'required|string|max:100',
-            'Detalle'=>'required|text|max:100',
-            'Stock'=>'integer',
-            'Precio'=>'required|',
-        ];
-
-        $mensaje=[
-            'required'=>'El :attribute es requerido',
-            'integer'=>'El :attribute es requerido'
-        ];
-
-        $this->validate($request, $campos, $mensaje);*/
         $request->validate([
-            'NombreProducto'=>'required|string|max:100',
-            'Detalle'=>'required|text|max:100',
-            'Stock'=>'integer',
-            'Precio'=>'required|',
+            'NombreProducto' => 'required|string|max:100',
+            'Detalle' => 'required|string|max:100',
+            'stock' => 'integer',
+            'precio' => 'required',
         ]); 
 
         $datosProducto = request()->except('_token'); 

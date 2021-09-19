@@ -29,6 +29,7 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">TemploGym</div>
             <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" href="{{ url('/') }}">DASHBOARD</a>
             @can('admin.empleado.index')
                 <a class="list-group-item list-group-item-action bg-light" href="{{ url('empleado') }}">Empleados</a>
             @endcan
@@ -126,6 +127,6 @@
     <!-- Bootstrap core JS-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <!-- Core theme JS-->
-    <script src="{{ asset('js/scripts.js') }}"></script></script>
-</body>
+    <script src="{{ asset('js/scripts.js') }}"></script>    
+    </body>
 </html>
